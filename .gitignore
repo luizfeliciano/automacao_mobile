@@ -1,0 +1,10 @@
+Gemfile.lock
+*.html
+*.json
+*.png
+*.DS_Store
+*.apk
+*.ipa
+*.out
+*.lock
+/code_analyzer

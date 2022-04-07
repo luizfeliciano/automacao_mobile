@@ -1,0 +1,7 @@
+# Separar os profiles para cada projeto (Larissa, Diogo e Luiz)
+
+# Reports
+html: --format pretty --format html --out report/html/report.html 
+json: --format pretty --format json --out report/json/report.json
+
+android: PLAT=android -p html -p json -r features/specs_definitions -r features/steps_definitions -r features/support -r features/actions  -r features/screens/android

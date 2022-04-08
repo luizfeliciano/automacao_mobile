@@ -5,7 +5,10 @@ require 'ffaker'
 class CadastroScreen < BaseActions
   def initialize
     @btn_mais               = '//android.view.ViewGroup/android.view.ViewGroup/android.widget.ImageView'
-    @cadastrar_novo         = 'floating_novo'
+    @msg_sobre_app          = '//android.widget.LinearLayout/android.webkit.WebView/android.webkit.WebView/android.view.View[1]'
+    @cadastrar_novo         = 'br.com.dudstecnologia.cadastrodeclientes:id/floating_novo'
+    @btn_exportar           = 'br.com.dudstecnologia.cadastrodeclientes:id/floating_exportar'
+    @btn_sobre              = 'br.com.dudstecnologia.cadastrodeclientes:id/floating_sobre'
     @radio_basico           = 'br.com.dudstecnologia.cadastrodeclientes:id/rdBasico'
     @radio_completo         = 'br.com.dudstecnologia.cadastrodeclientes:id/rdCompleto'
     @inputs_nome            = 'br.com.dudstecnologia.cadastrodeclientes:id/editNome'
@@ -41,9 +44,10 @@ class CadastroScreen < BaseActions
     @inputs_conta           = 'br.com.dudstecnologia.cadastrodeclientes:id/editConta'
     @btn_salvar             = 'br.com.dudstecnologia.cadastrodeclientes:id/btnSalvar'
     @btn_excluir            = 'br.com.dudstecnologia.cadastrodeclientes:id/btnExcluir'
-    @msg_cad_sucesso        = 'android:id/message'
+    @msg_sucesso            = 'android:id/message'
     @btn_ok_sim             = 'android:id/button1'
     @click_cad              = 'br.com.dudstecnologia.cadastrodeclientes:id/nomeLista'
+    @export_excel           = 'br.com.dudstecnologia.cadastrodeclientes:id/btnExportar'
   end
 
   def home_screen?
@@ -189,6 +193,82 @@ class CadastroScreen < BaseActions
     send_keys_id(@inputs_conta, '10256325')
   end
 
+  def seleciona_cadastro
+    $wait.until { element_on_screen_id?(@click_cad) }
+    click_id(@click_cad)
+  end
+
+  def click_excluir
+    $wait.until { element_on_screen_id?(@btn_excluir) }
+    click_id(@btn_excluir)
+  end
+
+  def confirma_excluir
+    $wait.until { element_on_screen_id?(@btn_ok_sim) }
+    click_id(@btn_ok_sim)
+  end
+
+  def click_finalizar_cadastro
+    click_id(@btn_salvar)
+  end
+
+  def click_exportar
+    $wait.until { element_on_screen_id?(@btn_exportar) }
+    click_id(@btn_exportar)
+  end
+
+  def click_exportar_excel
+    $wait.until { element_on_screen_id?(@export_excel) }
+    click_id(@export_excel)
+  end
+
+  def click_sobre
+    $wait.until { element_on_screen_id?(@btn_sobre) }
+    click_id(@btn_sobre)
+  end
+
+  def valida_cadastro_sucesso
+    $wait.until { element_on_screen_id?(@msg_sucesso) }
+    text_of_id(@msg_sucesso)
+  end
+
+  def valida_exportado_sucesso
+    $wait.until { element_on_screen_id?(@msg_sucesso) }
+    text_of_id(@msg_sucesso)
+  end
+
+  def valida_sobre_app
+    $wait.until { element_on_screen?(@msg_sobre_app) }
+    get_text_by_xpath(@msg_sobre_app)
+  end
+
+  def massa_cadastro
+    click_mais
+    click_cadastrar_novo
+    preencher_nome
+    click_id(@btn_salvar)
+    $wait.until { element_on_screen_id?(@btn_ok_sim) }
+    click_id(@btn_ok_sim)
+    @driver.back
+  end
+
+  def preencher_campos_cad_basico
+    preencher_nome
+    preencher_rg
+    preencher_cpf
+    preencher_dtnascimento
+    preencher_endereco
+    preencher_numero
+    preencher_bairro
+    preencher_cep
+    preencher_cidade
+    preencher_estado
+    preencher_telefone1
+    preencher_telefone2
+    preencher_email
+    preencher_observacoes
+  end
+
   def preencher_campos_cad_completo
     selecionar_cadastro_completo
     preencher_nome
@@ -223,61 +303,8 @@ class CadastroScreen < BaseActions
     preencher_conta
   end
 
-  def preencher_campos_cad_basico
-    preencher_nome
-    preencher_rg
-    preencher_cpf
-    preencher_dtnascimento
-    preencher_endereco
-    preencher_numero
-    preencher_bairro
-    preencher_cep
-    preencher_cidade
-    preencher_estado
-    preencher_telefone1
-    preencher_telefone2
-    preencher_email
-    preencher_observacoes
-  end
-
-  def massa_cadastro
-    click_mais
-    click_cadastrar_novo
-    preencher_nome
-    click_id(@btn_salvar)
-    $wait.until { element_on_screen_id?(@btn_ok_sim) }
-    click_id(@btn_ok_sim)
-    @driver.back
-  end
-
-  def seleciona_cadastro
-    $wait.until { element_on_screen_id?(@click_cad) }
-    click_id(@click_cad)
-  end
-
-  def click_excluir
-    $wait.until { element_on_screen_id?(@btn_excluir) }
-    click_id(@btn_excluir)
-  end
-
-  def confirma_excluir
-    $wait.until { element_on_screen_id?(@btn_ok_sim) }
-    click_id(@btn_ok_sim)
-  end
-
-  def click_finalizar_cadastro
-    click_id(@btn_salvar)
-  end
-
   def excluir_cadastro
     click_excluir
     confirma_excluir
-    binding.pry
   end
-
-  def valida_cadastro_sucesso
-    $wait.until { element_on_screen_id?(@msg_cad_sucesso) }
-    text_of_id(@msg_cad_sucesso)
-  end
-
 end

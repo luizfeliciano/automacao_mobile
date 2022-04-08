@@ -16,8 +16,8 @@ After do |scenario|
   foto = "report/screenshot/#{$sufix}/#{$sufix}_#{$name}_#{time.day}-#{time.month}-#{time.year}.png"
   $driver.screenshot(foto)
   embed(foto, 'image/png', 'Evidência(Screenshot)')
-  $driver.reset
-  $driver.driver_quit
+  #$driver.reset
+  #$driver.driver_quit
 end
 
 at_exit do

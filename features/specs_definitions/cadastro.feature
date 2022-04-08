@@ -1,12 +1,13 @@
 #language: pt
 
+@cadastro
 Funcionalidade: Criar cadastro de cliente APP
     Eu como usuário
     Quero criar um cadastro de cliente no APP
     Para ter acesso as suas informações
 
 
-@cadastro
+@cadastro_basico
     Cenario: Cadasto Basico - valido
         Dado que esteja na home do app
         Quando efetar um novo cadastro

@@ -15,7 +15,8 @@ Quando("preencher com dados basicos válidos") do
 end
 
 Quando("preencher com dados completos válidos") do
-  pending # Write code here that turns the phrase above into concrete actions
+  @cadastro.preencher_campos_cad_completo
+  @cadastro.click_finalizar_cadastro
 end
 
 Entao("o {string}") do |msg_cad_sucesso|

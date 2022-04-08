@@ -20,5 +20,5 @@ end
 def android(tag)
   sh 'rake appium_server'
   system "bundle exec cucumber -t \"#{tag}\" -p android"
-  #sh 'rake close_appium_server'
+  sh 'rake close_appium_server'
 end

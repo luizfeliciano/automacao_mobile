@@ -3,4 +3,6 @@ automationName = "UiAutomator2"
 platformName = "Android"
 deviceName = "Pixel_3a_API_30"
 autoGrantPermissions 	= true
+noReset 				= true
+fullRest 				= false
 app = "./cadastro_clientes_teste.apk"

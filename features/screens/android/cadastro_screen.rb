@@ -10,18 +10,35 @@ class CadastroScreen < BaseActions
     @radio_completo         = 'br.com.dudstecnologia.cadastrodeclientes:id/rdCompleto'
     @inputs_nome            = 'br.com.dudstecnologia.cadastrodeclientes:id/editNome'
     @inputs_rg              = 'br.com.dudstecnologia.cadastrodeclientes:id/editRg'
+    @inputs_rg_orgao        = 'br.com.dudstecnologia.cadastrodeclientes:id/editOrgao'
     @inputs_cpf             = 'br.com.dudstecnologia.cadastrodeclientes:id/editCpf'
     @inputs_dtnasc          = 'br.com.dudstecnologia.cadastrodeclientes:id/editData'
+    @inputs_mae             = 'br.com.dudstecnologia.cadastrodeclientes:id/editMae'
+    @inputs_pai             = 'br.com.dudstecnologia.cadastrodeclientes:id/editPai'
     @inputs_endereco        = 'br.com.dudstecnologia.cadastrodeclientes:id/editEndereco'
     @inputs_numero_end      = 'br.com.dudstecnologia.cadastrodeclientes:id/editNumero'
     @inputs_bairro          = 'br.com.dudstecnologia.cadastrodeclientes:id/editBairro'
     @inputs_cep             = 'br.com.dudstecnologia.cadastrodeclientes:id/editCep'
     @inputs_cidade          = 'br.com.dudstecnologia.cadastrodeclientes:id/editCidade'
     @spinner_estado         = 'br.com.dudstecnologia.cadastrodeclientes:id/spinnerEstados'
+    @inputs_naturalidade   = 'br.com.dudstecnologia.cadastrodeclientes:id/editNaturalidade'
     @inputs_telefone1       = 'br.com.dudstecnologia.cadastrodeclientes:id/editTelefone1'
     @inputs_telefone2       = 'br.com.dudstecnologia.cadastrodeclientes:id/editTelefone2'
     @inputs_email           = 'br.com.dudstecnologia.cadastrodeclientes:id/editEmail'
     @inputs_observacao      = 'br.com.dudstecnologia.cadastrodeclientes:id/editObs'
+  #Informações Profissionais
+    @inputs_empresa         = 'br.com.dudstecnologia.cadastrodeclientes:id/editEmpresa'
+    @inputs_cargo           = 'br.com.dudstecnologia.cadastrodeclientes:id/editCargo'
+    @inputs_endereco_empr   = 'br.com.dudstecnologia.cadastrodeclientes:id/editEnderecoEmpresa'
+    @inputs_cep_empr        = 'br.com.dudstecnologia.cadastrodeclientes:id/editCepEmpresa'
+    @inputs_telefone_empr   = 'br.com.dudstecnologia.cadastrodeclientes:id/editTelefoneEmpresa'
+    @inputs_dtadmissao      = 'br.com.dudstecnologia.cadastrodeclientes:id/editDataAdmissao'
+    @inputs_renda           = 'br.com.dudstecnologia.cadastrodeclientes:id/editRenda'
+    @inputs_telefoneref1    = 'br.com.dudstecnologia.cadastrodeclientes:id/editTelefoneRef1'
+    @inputs_telefoneref2    = 'br.com.dudstecnologia.cadastrodeclientes:id/editTelefoneRef2'
+    @inputs_banco           = 'br.com.dudstecnologia.cadastrodeclientes:id/editBanco'
+    @inputs_agencia         = 'br.com.dudstecnologia.cadastrodeclientes:id/editAgencia'
+    @inputs_conta           = 'br.com.dudstecnologia.cadastrodeclientes:id/editConta'
     @btn_salvar             = 'br.com.dudstecnologia.cadastrodeclientes:id/btnSalvar'
     @btn_excluir            = 'br.com.dudstecnologia.cadastrodeclientes:id/'
     @msg_cad_sucesso        = 'android:id/message'
@@ -38,6 +55,11 @@ class CadastroScreen < BaseActions
   def click_cadastrar_novo
     $wait.until { element_on_screen_id?(@cadastrar_novo) }
     click_id(@cadastrar_novo)
+  end
+
+  def selecionar_cadastro_completo
+    $wait.until { element_on_screen_id?(@inputs_nome) }
+    click_id(@radio_completo)
   end
 
   def preencher_nome
@@ -97,6 +119,106 @@ class CadastroScreen < BaseActions
 
   def preencher_observacoes
     send_keys_id(@inputs_observacao, FFaker::Lorem.word)
+  end
+
+  def preencher_orgao_emissor
+    send_keys_id(@inputs_rg_orgao, 'SSP/SP')
+  end
+
+  def preencher_nome_mae
+    send_keys_id(@inputs_mae, FFaker::NameBR.first_name_female)
+  end
+
+  def preencher_nome_pai
+    send_keys_id(@inputs_pai, FFaker::NameBR.first_name_male)
+  end
+
+  def preencher_naturalidade
+    send_keys_id(@inputs_naturalidade, FFaker::AddressBR.city)
+  end
+
+  def preencher_empresa
+    scroll_to('Conta')
+    send_keys_id(@inputs_empresa, FFaker::Company.name)
+  end
+
+  def preencher_cargo
+    send_keys_id(@inputs_cargo, FFaker::Company.position)
+  end
+
+  def preencher_endereco_empr
+    send_keys_id(@inputs_endereco_empr, FFaker::AddressBR.street)
+  end
+
+  def preencher_cep_empr
+    send_keys_id(@inputs_cep_empr, FFaker::AddressBR.zip_code)
+  end
+
+  def preencher_telefone_empr
+    send_keys_id(@inputs_telefone_empr, FFaker::PhoneNumberBR.mobile_phone_number)
+  end
+
+  def preencher_dtadmissao
+    send_keys_id(@inputs_dtadmissao, '01012000')
+  end
+
+  def preencher_renda
+    send_keys_id(@inputs_renda, '5000')
+  end
+
+  def preencher_telefone_ref1
+    send_keys_id(@inputs_telefoneref1, FFaker::PhoneNumberBR.mobile_phone_number)
+  end
+
+  def preencher_telefone_ref2
+    send_keys_id(@inputs_telefoneref2, FFaker::PhoneNumberBR.mobile_phone_number)
+  end
+
+  def preencher_banco
+    send_keys_id(@inputs_banco, 'Itaú')
+  end
+  
+  def preencher_agencia
+    send_keys_id(@inputs_agencia, '0001')
+  end
+
+  def preencher_conta
+    scroll_to('Conta')
+    send_keys_id(@inputs_conta, '10256325')
+  end
+
+  def preencher_campos_cad_completo
+    selecionar_cadastro_completo
+    preencher_nome
+    preencher_rg
+    preencher_orgao_emissor
+    preencher_cpf
+    preencher_dtnascimento
+    preencher_nome_mae
+    preencher_nome_pai
+    preencher_endereco
+    preencher_numero
+    preencher_bairro
+    preencher_cep
+    preencher_cidade
+    preencher_estado
+    preencher_naturalidade
+    preencher_telefone1
+    preencher_telefone2
+    preencher_email
+    preencher_observacoes
+    preencher_empresa
+    preencher_cargo
+    preencher_endereco_empr
+    preencher_cep_empr
+    preencher_telefone_empr
+    preencher_dtadmissao
+    preencher_renda
+    preencher_telefone_ref1
+    preencher_telefone_ref2
+    preencher_banco
+    preencher_agencia
+    preencher_conta
   end
 
   def preencher_campos_cad_basico

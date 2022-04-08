@@ -2,19 +2,19 @@
 
 class BaseActions
   def click_id(value)
-    $driver.find_element(:id, value.to_s).click
+    @driver.find_element(:id, value.to_s).click
   end
 
   def click_by_text(value)
-    $driver.find_element(:xpath, "//*[contains(@text,\"#{value}\")]").click
+    @driver.find_element(:xpath, "//*[contains(@text,\"#{value}\")]").click
   end
 
   def click_xpath(value)
-    $driver.find_element(:xpath, value.to_s).click
+    @driver.find_element(:xpath, value.to_s).click
   end
 
   def click_accessibility_id(value)
-    $driver.find_element(:accessibility_id, value.to_s).click
+    @driver.find_element(:accessibility_id, value.to_s).click
   end
 
   def send_keys_id(id, field)

@@ -22,3 +22,17 @@ end
 Entao("o {string}") do |msg_cad_sucesso|
   expect(@cadastro.valida_cadastro_sucesso).to eql msg_cad_sucesso
 end
+
+Dado('que esteja na home do app e tenha um cadastro') do
+  expect(@cadastro.home_screen?).to be_truthy
+  @cadastro.massa_cadastro
+end
+
+Quando('efetar uma exclusão') do
+  @cadastro.seleciona_cadastro
+end
+
+
+Entao('o cadastro excluido com sucesso') do
+  @cadastro.excluir_cadastro
+end

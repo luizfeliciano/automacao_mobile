@@ -40,8 +40,10 @@ class CadastroScreen < BaseActions
     @inputs_agencia         = 'br.com.dudstecnologia.cadastrodeclientes:id/editAgencia'
     @inputs_conta           = 'br.com.dudstecnologia.cadastrodeclientes:id/editConta'
     @btn_salvar             = 'br.com.dudstecnologia.cadastrodeclientes:id/btnSalvar'
-    @btn_excluir            = 'br.com.dudstecnologia.cadastrodeclientes:id/'
+    @btn_excluir            = 'br.com.dudstecnologia.cadastrodeclientes:id/btnExcluir'
     @msg_cad_sucesso        = 'android:id/message'
+    @btn_ok_sim             = 'android:id/button1'
+    @click_cad              = 'br.com.dudstecnologia.cadastrodeclientes:id/nomeLista'
   end
 
   def home_screen?
@@ -238,8 +240,39 @@ class CadastroScreen < BaseActions
     preencher_observacoes
   end
 
+  def massa_cadastro
+    click_mais
+    click_cadastrar_novo
+    preencher_nome
+    click_id(@btn_salvar)
+    $wait.until { element_on_screen_id?(@btn_ok_sim) }
+    click_id(@btn_ok_sim)
+    @driver.back
+  end
+
+  def seleciona_cadastro
+    $wait.until { element_on_screen_id?(@click_cad) }
+    click_id(@click_cad)
+  end
+
+  def click_excluir
+    $wait.until { element_on_screen_id?(@btn_excluir) }
+    click_id(@btn_excluir)
+  end
+
+  def confirma_excluir
+    $wait.until { element_on_screen_id?(@btn_ok_sim) }
+    click_id(@btn_ok_sim)
+  end
+
   def click_finalizar_cadastro
     click_id(@btn_salvar)
+  end
+
+  def excluir_cadastro
+    click_excluir
+    confirma_excluir
+    binding.pry
   end
 
   def valida_cadastro_sucesso
